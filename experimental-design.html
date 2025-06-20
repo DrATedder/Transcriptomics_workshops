@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pre-Session Reading: Experimental Design for Transcriptomics</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      margin: 2em auto;
+      max-width: 1000px;
+      padding: 2em;
+      color: #333;
+    }
+    h1, h2 {
+      color: #003366;
+    }
+    h3 {
+      color: #005599;
+    }
+    code, pre {
+      background: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    pre {
+      background: #f0f0f0;
+      padding: 1em;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    details {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 5px;
+    }
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #003366;
+    }
+    .callout {
+      background-color: #e8f4fc;
+      border-left: 5px solid #2196f3;
+      padding: 1em;
+      margin: 1em 0;
+    }
+    .highlight {
+      background-color: #fff5cc;
+      padding: 0.3em;
+      border-left: 4px solid #ffc107;
+      margin: 1em 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Pre-Session Reading: Experimental Design for Transcriptomics</h1>
+
+<div class="callout">
+  <strong>Goal:</strong> Equip students with the principles and practical considerations needed to design robust, reproducible, and ethical transcriptomic experiments, with an emphasis on statistical validity and biological interpretability.
+</div>
+
+<h2>1. Introduction</h2>
+<p>
+A well-designed experiment is the foundation of meaningful transcriptomic analysis. Without appropriate experimental design, even the most advanced analytical tools cannot compensate for flawed sampling, confounding variables, or inadequate replication. Thoughtful planning must precede sequencing, integrating statistical, biological, technical, and ethical factors.
+</p>
+<p>
+This pre-session reading explores the key components of transcriptomic experimental design, particularly RNA-seq and scRNA-seq, including hypotheses formulation, replication strategies, randomization, confounding variables, sample size estimation, batch correction, and alignment with the 3Rs (Replacement, Reduction, Refinement).
+</p>
+
+<h2>2. Defining the Biological Question</h2>
+<p>
+Experimental design begins with a clearly articulated question or hypothesis. Are you exploring differential gene expression, characterizing transcriptomic signatures, or identifying biomarkers? Your hypothesis determines every downstream choice: sample type, condition contrasts, statistical model, and sequencing parameters.
+</p>
+
+<details>
+  <summary>Examples of Research Questions</summary>
+  <ul>
+    <li>Which genes are differentially expressed in infected vs. healthy individuals?</li>
+    <li>How does a dietary intervention affect the gut transcriptome?</li>
+    <li>What is the transcriptomic profile of stressed vs. non-stressed individuals during exams?</li>
+  </ul>
+</details>
+
+<h2>3. Experimental Units, Biological and Technical Replicates</h2>
+<p>
+A critical distinction must be made between the experimental unit and the observational unit. In transcriptomics, the experimental unit is the independent sample from which RNA is extracted (e.g., individual or tissue sample), while the observational unit is often the read count per gene.
+</p>
+
+<ul>
+  <li><strong>Biological Replicates</strong> capture inter-individual variation (e.g., three different individuals per treatment).</li>
+  <li><strong>Technical Replicates</strong> control for variation introduced during RNA extraction, library prep, or sequencing (less crucial for RNA-seq given its high reproducibility).</li>
+</ul>
+
+<h2>4. Controlling Confounders and Bias</h2>
+<p>
+Transcriptomic data are sensitive to a range of confounders that can mask biological signals. These include:
+</p>
+<ul>
+  <li><strong>Batch effects</strong>: sequencing run, library preparation kit, technician</li>
+  <li><strong>Time of day</strong>: circadian influences on expression</li>
+  <li><strong>Sex, age, health status</strong>: biological confounders</li>
+</ul>
+
+<p><strong>Design strategy:</strong> Apply blocking, randomization, and balance across batches to mitigate these effects. Use tools like <code>ComBat</code> for downstream correction if necessary.</p>
+
+<h2>5. Sample Size and Power Analysis</h2>
+
+<p>
+Transcriptomic experiments involve testing thousands of genes simultaneously. Statistical power is influenced by:
+</p>
+<ul>
+  <li><strong>Effect size:</strong> magnitude of expression change</li>
+  <li><strong>Variance:</strong> biological and technical variability</li>
+  <li><strong>False Discovery Rate (FDR):</strong> typically set at 5%</li>
+  <li><strong>Number of replicates:</strong> more replicates improve power, especially with high variance</li>
+</ul>
+
+<p>
+Power analysis tools such as <code>RNASeqPower</code>, or calculations using using real data (e.g., from <code>DESeq2</code> or <code>GEO</code>) can guide sample size decisions when used with tools such as <code>PowerAnalysisApp</code>.
+</p>
+
+<details>
+  <summary>Example: Estimating Power</summary>
+  <p>
+  Suppose we want 80% power to detect a 2-fold change in gene expression with FDR 0.05 and dispersion of 0.2. <code>RNASeqPower</code> estimates a minimum of 6 replicates per group. As dispersion increases, more replicates are needed.
+  <br><strong>Note.</strong> When choosing thresholds it is essential that you make decisions based on biological and mathematical data. <strong>Don't</strong> just pick a number 'because everyone else uses it'!
+  </p>
+</details>
+
+<h2>6. Randomization and Blocking</h2>
+
+<p>
+Randomization prevents systematic bias, while blocking accounts for known sources of variation. For instance, alternate sample prep order across groups (not all treatment samples first) and distribute samples from different groups across sequencing lanes.
+</p>
+
+<details>
+  <summary>Designing a Blocking Strategy</summary>
+  <p>
+  If sequencing must be done in two batches, ensure each batch contains an equal number of samples from each group. This avoids confounding treatment with batch.
+  </p>
+</details>
+
+<h2>7. Sequencing Depth and Coverage</h2>
+
+<p>
+Depth refers to the number of reads sequenced per sample. It affects sensitivity to detect lowly expressed genes and transcript isoforms.
+</p>
+
+<table>
+  <thead><tr><th>Application</th><th>Recommended Depth</th></tr></thead>
+  <tbody>
+    <tr><td>Standard bulk RNA-seq</td><td>30–50 million reads/sample</td></tr>
+    <tr><td>Low-input or tissue-specific analysis</td><td>50–100 million reads/sample</td></tr>
+    <tr><td>Single-cell RNA-seq</td><td>~50,000 reads/cell</td></tr>
+  </tbody>
+</table>
+
+<p>
+Over-sequencing inflates cost without adding power if biological replication is insufficient. Under-sequencing reduces discovery potential. Use <code>subSeq</code> or pilot studies to determine optimal trade-off.
+</p>
+
+<h2>8. RNA Integrity and Quality Control</h2>
+<p>
+RNA degradation biases transcript abundance estimates, especially 3'-biased read loss. Ensure RIN scores &gt;7.0 where possible. Degraded samples should be avoided or accounted for statistically.
+</p>
+
+<details>
+  <summary>QC Tools</summary>
+  <ul>
+    <li><code>FastQC</code>: read quality</li>
+    <li><code>RSeQC</code>: GC content, coverage bias</li>
+    <li><code>Picard</code>: duplication, insert size metrics</li>
+  </ul>
+</details>
+
+<h2>9. Statistical Models and Multiple Testing</h2>
+
+<p>
+RNA-seq involves testing 10,000–30,000 genes, making multiple testing correction essential. Tools like <code>DESeq2</code>, <code>edgeR</code>, and <code>limma-voom</code> use generalized linear models and apply FDR correction (Benjamini-Hochberg) to control Type I error.
+</p>
+
+<ul>
+  <li><strong>Uncorrected p-value:</strong> inflated false positives</li>
+  <li><strong>FDR-adjusted p-value:</strong> controls expected proportion of false positives among significant results</li>
+</ul>
+
+<p>
+Beware of <strong>p-value inflation</strong> due to low replication, overfitting, or poor normalization.
+</p>
+
+<h2>10. The 3Rs in Transcriptomic Experimentation</h2>
+
+<p>
+In animal-based transcriptomics, adherence to the 3Rs is essential:
+</p>
+
+<ul>
+  <li><strong>Replacement:</strong> use cell lines, organoids, or archived tissues where feasible</li>
+  <li><strong>Reduction:</strong> maximize data output per animal (e.g., dual-omics, multiple tissues), use robust power calculations to avoid over-sampling</li>
+  <li><strong>Refinement:</strong> minimize suffering, optimize protocols for humane endpoints</li>
+</ul>
+
+<p>
+Ethical review committees increasingly require justification of sample sizes with statistical rationale. Multi-use sample designs and pilot testing are both 3R-aligned strategies.
+</p>
+
+<h2>11. Final Checklist Before Sequencing</h2>
+
+<ul>
+  <li> Clear, testable hypothesis</li>
+  <li> Independent biological replicates defined</li>
+  <li> Sample randomization and blocking planned</li>
+  <li> Sequencing depth matched to goals</li>
+  <li> RNA integrity checked</li>
+  <li> Statistical power estimated</li>
+  <li> Confounders minimized</li>
+  <li> Metadata fully recorded</li>
+</ul>
+
+<h2>12. Recommended Reading</h2>
+<table>
+  <thead>
+    <tr><th>Title</th><th>Authors</th><th>Link</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A survey of best practices for RNA-seq data analysis</td>
+      <td>Conesa et al. (2016)</td>
+      <td><a href="https://doi.org/10.1186/s13059-016-0881-8" target="_blank">DOI:10.1186/s13059-016-0881-8</a></td>
+    </tr>
+    <tr>
+      <td>Statistical design and analysis of RNA sequencing data</td>
+      <td>Auer & Doerge. (2010)</td>
+      <td><a href="https://doi.org/10.1534/genetics.110.114983" target="_blank">DOI:10.1534/genetics.110.114983</a></td>
+    </tr>
+    <tr>
+      <td>Power analysis and sample size estimation for RNA-Seq differential expression</td>
+      <td>Ching et al. (2014)</td>
+      <td><a href="https://doi.org/10.1261/rna.046011.114" target="_blank">DOI:10.1261/rna.046011.114</a></td>
+    </tr>
+    <tr>
+      <td>Controlling the false discovery rate</td>
+      <td>Benjamini & Hochberg. (1995)</td>
+      <td><a href="https://doi.org/10.1111/j.2517-6161.1995.tb02031.x" target="_blank">DOI:10.1111/j.2517-6161.1995.tb02031.x</a></td>
+    </tr>
+    <tr>
+      <td>RNA integrity and the effect on the real-time qRT-PCR performance</td>
+      <td>Fleige & Pfaffl. (2006)</td>
+      <td><a href="https://doi.org/10.1016/j.mam.2005.12.003" target="_blank">DOI:10.1016/j.mam.2005.12.003</a></td>
+    </tr>
+    <tr>
+      <td>The 3Rs and Humane Experimental Technique: Implementing Change</td>
+      <td>Hubrect & Carter. (2019)</td>
+      <td><a href="https://doi.org/10.3390/ani9100754" target="_blank">DOI:10.3390/ani9100754</a></td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
+

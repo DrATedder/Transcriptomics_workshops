@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Overview</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      margin: 2em auto;
+      max-width: 900px;
+      padding: 2em;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #003366;
+    }
+
+    h3 {
+      color: #005599;
+    }
+
+    code, pre {
+      background: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    pre {
+      background: #f0f0f0;
+      padding: 1em;
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    details {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 5px;
+    }
+
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #003366;
+    }
+
+    .highlight {
+      background-color: #fff5cc;
+      padding: 0.3em;
+      border-left: 4px solid #ffc107;
+      margin: 1em 0;
+    }
+
+    .callout {
+      background-color: #e8f4fc;
+      border-left: 5px solid #2196f3;
+      padding: 1em;
+      margin: 1em 0;
+    }
+
+    .flowchart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 2em 0;
+    }
+
+    .flow-step {
+      background-color: #f0f8ff;
+      border: 2px solid #0074cc;
+      border-radius: 8px;
+      padding: 1em 2em;
+      margin: 0.5em;
+      width: 80%;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .arrow {
+      font-size: 1.5em;
+      color: #0074cc;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5em 1em;
+      margin: 0.5em 0;
+      background-color: #005599;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .btn:hover {
+      background-color: #003366;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Project Overview</h1>
+
+<div class="callout">
+  <strong>Purpose:</strong> Apply a complete workflow from dataset selection to functional interpretation using public gene expression data.
+</div>
+
+<h2>1. Introduction</h2>
+<p>
+This project introduces you to core bioinformatics tools and analytical reasoning required for effective gene expression data analysis. You will identify a relevant dataset, assess its experimental design, compute effect sizes, perform power and differential expression analysis, and interpret biological significance using functional annotation tools.
+</p>
+<p>
+The aim is to develop both your technical fluency and your critical thinking about dataset suitability, statistical power, and biological relevance.
+</p>
+
+<h2>2. Suggested Pre-Reading</h2>
+<ul>
+  <li><strong>Cohen, J. (1992)</strong> – A power primer. <em>Psychological Bulletin</em>, 112(1), 155–159. <a href="https://doi.org/10.1037/0033-2909.112.1.155" target="_blank">DOI</a></li>
+  <li><strong>NCBI GEO Overview</strong> – <a href="https://www.ncbi.nlm.nih.gov/geo/info/overview.html" target="_blank">GEO Info Page</a></li>
+  <li><strong>Limma Vignette (Bioconductor)</strong> – For understanding differential expression methods: <a href="https://bioconductor.org/packages/release/bioc/html/limma.html" target="_blank">Limma Package</a></li>
+  <li><strong>DAVID Functional Annotation Tutorial</strong> – <a href="https://david.ncifcrf.gov/content.jsp?file=functional_annotation.html" target="_blank">Link</a></li>
+</ul>
+
+<h2>3. Project Workflow</h2>
+
+<div class="flowchart">
+  <div class="flow-step">1. Find and Assess a Dataset (GEO)</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step">2. Review Experimental Design and Methods</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step">3. Compute Effect Sizes (GEO_EffectSizeApp)</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step">4. Estimate Power and Required Sample Size (PowerAnalysisApp)</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step">5. Run Differential Expression Analysis (GEO2R)</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step">6. Interpret Results Using GO/Pathways (DAVID)</div>
+</div>
+
+<h2>4. Things to Think About</h2>
+<ul>
+  <li><strong>Is the experimental design clear and biologically meaningful?</strong></li>
+  <li><strong>Do the sample sizes support robust inference?</strong> Consider power analysis.</li>
+  <li><strong>Have treatments, time points, or confounders been well described?</strong></li>
+  <li><strong>Can effect sizes help you prioritise meaningful signals?</strong></li>
+  <li><strong>How will you explain or justify your filtering choices?</strong></li>
+  <li><strong>Are the results interpretable using current biological knowledge?</strong></li>
+</ul>
+
+<div class="highlight">
+  This project is as much about <strong>thinking critically</strong> as it is about <strong>using tools</strong>.
+</div>
+
+<h2>5. Tools and Apps You Will Use</h2>
+<table>
+  <thead>
+    <tr><th>Tool</th><th>Purpose</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><a href="https://www.ncbi.nlm.nih.gov/gds" target="_blank">GEO Browser</a></td><td>Search and download gene expression datasets</td></tr>
+    <tr><td><a href="https://github.com/DrATedder/GEO_EffectSizeApp" target="_blank">GEO_EffectSizeApp</a></td><td>Compute Cohen’s d for each gene</td></tr>
+    <tr><td><a href="https://github.com/DrATedder/PowerAnalysisApp" target="_blank">PowerAnalysisApp</a></td><td>Estimate power and sample sizes</td></tr>
+    <tr><td><a href="https://www.ncbi.nlm.nih.gov/geo/geo2r/" target="_blank">GEO2R</a></td><td>Differential expression analysis (GUI)</td></tr>
+    <tr><td><a href="https://david.ncifcrf.gov/" target="_blank">DAVID</a></td><td>Gene ontology and functional annotation</td></tr>
+  </tbody>
+</table>
+
+<h2>6. Final Outputs and Learning Goals</h2>
+<ul>
+  <li>Annotated report of dataset evaluation and rationale for selection</li>
+  <li>Effect size summary and filtered gene lists</li>
+  <li>Power analysis results and plot</li>
+  <li>Differential expression table (GEO2R)</li>
+  <li>Functional enrichment results (DAVID)</li>
+  <li>Reflective commentary on strengths, weaknesses, and biological interpretation</li>
+</ul>
+
+<h2>7. Summary</h2>
+<p>
+By following this structured pipeline, you will learn how to handle real-world gene expression data and make justified analytical decisions. Keep notes, be critical, and discuss your reasoning.
+</p>
+
+<div class="callout">
+  <strong>Reminder:</strong> Ask questions, collaborate with peers, and don’t be afraid to explore!
+</div>
+
+</body>
+</html>

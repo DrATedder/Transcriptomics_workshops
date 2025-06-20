@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Differential Expression with GEO2R</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      margin: 2em auto;
+      max-width: 900px;
+      padding: 2em;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #003366;
+    }
+
+    h3 {
+      color: #005599;
+    }
+
+    code, pre {
+      background: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    pre {
+      background: #f0f0f0;
+      padding: 1em;
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    details {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 5px;
+    }
+
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #003366;
+    }
+
+    .highlight {
+      background-color: #fff5cc;
+      padding: 0.3em;
+      border-left: 4px solid #ffc107;
+      margin: 1em 0;
+    }
+
+    .callout {
+      background-color: #e8f4fc;
+      border-left: 5px solid #2196f3;
+      padding: 1em;
+      margin: 1em 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5em 1em;
+      margin: 0.5em 0;
+      background-color: #005599;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .btn:hover {
+      background-color: #003366;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Differential Expression with GEO2R</h1>
+
+<div class="callout">
+  <strong>Purpose:</strong> Perform exploratory analysis of gene expression data without coding.
+</div>
+
+<h2>1. Introduction and Rationale</h2>
+<p>
+GEO2R is a web-based tool from the NCBI's Gene Expression Omnibus (GEO) platform, allowing users to identify differentially expressed genes between groups. It is designed for users with minimal coding experience and supports microarray datasets.
+</p>
+<p>
+This tool compares gene expression levels across defined sample groups (e.g., treated vs. control) to find statistically significant changes in gene expression.
+</p>
+<p>
+<strong>GEO2R Website:</strong> <a href="https://www.ncbi.nlm.nih.gov/geo/geo2r/" target="_blank">https://www.ncbi.nlm.nih.gov/geo/geo2r/</a>
+</p>
+
+<h2>2. Understanding the Data</h2>
+<details open>
+  <summary>GEO Series and Samples</summary>
+  <p>GEO Series (GSE IDs) are experimental datasets that group individual samples (GSMs). They are associated with a platform (GPL) which provides information about the measurement technology used.</p>
+</details>
+
+<details>
+  <summary>Platforms and Probes</summary>
+  <p>
+  Each GEO Series is linked to a platform defining probe sets, such as Affymetrix or Illumina chips. Each probe corresponds to a gene or transcript.
+  </p>
+</details>
+
+<h2>3. Preparing for Analysis</h2>
+<details open>
+  <summary>Choose a Dataset</summary>
+  <ul>
+    <li>Visit <a href="https://www.ncbi.nlm.nih.gov/gds" target="_blank">https://www.ncbi.nlm.nih.gov/gds</a></li>
+    <li>Search with keywords (e.g., “liver cancer”)</li>
+    <li>Ensure at least 3 biological replicates per condition</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Examine Study Design</summary>
+  <p>Check the study metadata for grouping variables (treatment/control, time point, etc.). Proper group assignment is essential for valid statistical inference.</p>
+</details>
+
+<h2>4. Performing the Analysis</h2>
+<details open>
+  <summary>Step 1: Access GEO2R</summary>
+  <ul>
+    <li>Go to the chosen GEO Series page (e.g., GSE12345)</li>
+    <li>Click <strong>"Analyze with GEO2R"</strong></li>
+  </ul>
+</details>
+
+<details>
+  <summary>Step 2: Define Sample Groups</summary>
+  <p>Assign each sample to Group 1 or Group 2 by clicking its label. Base this on the original study’s metadata.</p>
+</details>
+
+<details>
+  <summary>Step 3: Customize Options</summary>
+  <ul>
+    <li><strong>Log Transformation:</strong> Leave ON unless otherwise noted</li>
+    <li><strong>Statistical Test:</strong> GEO2R uses Limma (moderated t-test)</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Step 4: Run the Analysis</summary>
+  <p>Click <strong>“Top 250”</strong> for a quick view or <strong>“Save All Results”</strong> to download the full dataset.</p>
+</details>
+
+<h2>5. Interpreting Results</h2>
+<table>
+  <thead>
+    <tr><th>Column</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>Gene.symbol</code></td><td>Official gene symbol</td></tr>
+    <tr><td><code>adj.P.Val</code></td><td>Adjusted p-value (FDR control)</td></tr>
+    <tr><td><code>P.Value</code></td><td>Unadjusted p-value</td></tr>
+    <tr><td><code>logFC</code></td><td>Log2 fold-change</td></tr>
+    <tr><td><code>t</code></td><td>t-statistic (from Limma)</td></tr>
+    <tr><td><code>B</code></td><td>Log-odds of DE</td></tr>
+  </tbody>
+</table>
+
+<div class="highlight">
+  Use <code>adj.P.Val &lt; 0.05</code> and <code>|logFC| ≥ 1</code> for strong candidate genes.
+</div>
+
+<h2>6. Multiple Testing and Volcano Plot</h2>
+<p>
+GEO2R applies the Benjamini-Hochberg procedure to control the False Discovery Rate. This reduces false positives due to multiple comparisons.
+</p>
+
+<details>
+  <summary>Volcano Plot (Optional)</summary>
+  <p>Plot <strong>log2 Fold Change</strong> vs. <strong>–log10 Adjusted p-value</strong> to visualize effect size and significance.</p>
+</details>
+
+<h2>7. Exporting and Downstream Analysis</h2>
+<p>
+Click <strong>“Save All Results”</strong> to export. Open in Excel or import into R/Python for additional filtering or visualization.
+</p>
+
+<h2>8. Next Steps</h2>
+<ul>
+  <li><strong>Pathway/Enrichment Analysis:</strong> DAVID, Enrichr, or g:Profiler</li>
+  <li><strong>Network Analysis:</strong> STRING, Cytoscape</li>
+</ul>
+
+<h2>9. Best Practices Summary</h2>
+<table>
+  <thead>
+    <tr><th>Component</th><th>Recommendation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Biological Replicates</td><td>At least 3 per group</td></tr>
+    <tr><td>Log Transform</td><td>Leave enabled unless pre-logged</td></tr>
+    <tr><td>Statistical Test</td><td>Limma (default)</td></tr>
+    <tr><td>Significance Threshold</td><td>adj.P.Val &lt; 0.05</td></tr>
+    <tr><td>Fold-Change Threshold</td><td>|logFC| ≥ 1</td></tr>
+  </tbody>
+</table>
+
+<h2>10. References</h2>
+<ul>
+  <li><a href="https://www.ncbi.nlm.nih.gov/geo/info/geo2r.html" target="_blank">GEO2R Documentation</a></li>
+  <li><a href="https://bioconductor.org/packages/release/bioc/html/limma.html" target="_blank">Limma Package</a></li>
+  <li><a href="https://www.ncbi.nlm.nih.gov/geo/" target="_blank">NCBI GEO Homepage</a></li>
+</ul>
+
+</body>
+</html>
+

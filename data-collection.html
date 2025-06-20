@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Finding and Collecting Suitable Data</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      margin: 2em auto;
+      max-width: 900px;
+      padding: 2em;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #003366;
+    }
+
+    h3 {
+      color: #005599;
+    }
+
+    code, pre {
+      background: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    pre {
+      background: #f0f0f0;
+      padding: 1em;
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    details {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 5px;
+    }
+
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #003366;
+    }
+
+    .highlight {
+      background-color: #fff5cc;
+      padding: 0.3em;
+      border-left: 4px solid #ffc107;
+      margin: 1em 0;
+    }
+
+    .callout {
+      background-color: #e8f4fc;
+      border-left: 5px solid #2196f3;
+      padding: 1em;
+      margin: 1em 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5em 1em;
+      margin: 0.5em 0;
+      background-color: #005599;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .btn:hover {
+      background-color: #003366;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Finding and Collecting Suitable Data</h1>
+
+<div class="callout">
+  <strong>Goal:</strong> Identify, evaluate, and collect appropriate public gene expression data from the NCBI GEO repository for analysis.
+</div>
+
+<h2>1. Introduction</h2>
+<p>
+Before conducting any analysis, it is essential to find a dataset that aligns with your research question and meets basic quality and design criteria.
+</p>
+<p>
+This guide walks you through how to explore datasets from the <strong>NCBI Gene Expression Omnibus (GEO)</strong>, assess their experimental design, and collect supporting metadata and methodological details.
+</p>
+<p>
+<strong>GEO Browser:</strong> <a href="https://www.ncbi.nlm.nih.gov/gds" target="_blank">https://www.ncbi.nlm.nih.gov/gds</a>
+</p>
+
+<h2>2. Searching for a Dataset</h2>
+<details open>
+  <summary>Step 1: Use the GEO DataSets Portal</summary>
+  <ul>
+    <li>Go to <a href="https://www.ncbi.nlm.nih.gov/gds" target="_blank">https://www.ncbi.nlm.nih.gov/gds</a></li>
+    <li>Search using relevant keywords (e.g., <em>“asthma treatment”, “avian influenza”, “liver fibrosis”</em>)</li>
+    <li>Filter results by organism, study type (e.g., Expression profiling by array), or sample size</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Step 2: Open a GEO Series (GSE) Record</summary>
+  <p>Click on a GSE ID (e.g., <code>GSE123456</code>) to view detailed metadata, platform information, and sample description.</p>
+</details>
+
+<h2>3. Assessing Suitability</h2>
+<details open>
+  <summary>Check the Experimental Design</summary>
+  <ul>
+    <li>Look for clear grouping: treatment vs. control, disease vs. healthy, etc.</li>
+    <li>Ensure at least <strong>3 biological replicates</strong> per group</li>
+    <li>Beware of pseudoreplication or unclear group definitions</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Evaluate Sample and Platform Information</summary>
+  <p>Scroll to the "Sample table" or "Sample list" section. Pay attention to:</p>
+  <ul>
+    <li>Sample annotations (e.g., group labels, treatment details)</li>
+    <li>Platform (GPL) used (e.g., Affymetrix Human Genome U133 Plus 2.0 Array)</li>
+    <li>Consistency of platform across samples</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Download the Series Matrix File</summary>
+  <p>
+    Under <strong>“Download family”</strong>, look for the <code>Series Matrix File(s)</code>. This file contains normalized expression data and sample annotations.
+  </p>
+  <ul>
+    <li>Right-click the link and choose <em>"Save link as..."</em></li>
+    <li>Unzip if necessary (the app requires an uncompressed <code>.txt</code> matrix file)</li>
+  </ul>
+</details>
+
+<h2>4. Reviewing the Associated Publication</h2>
+<details open>
+  <summary>Step 1: Locate the Reference Paper</summary>
+  <ul>
+    <li>Scroll to the bottom of the GEO page for the <strong>“Relations”</strong> section</li>
+    <li>Click the PMID or DOI link to access the study publication</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Step 2: Extract Methodological Details</summary>
+  <ul>
+    <li>Identify sample collection methods and inclusion/exclusion criteria</li>
+    <li>Understand treatment conditions, timepoints, or dosing if applicable</li>
+    <li>Note any batch effects or confounders discussed in the paper</li>
+  </ul>
+</details>
+
+<div class="highlight">
+  Do not rely on GEO metadata alone. The associated paper often contains critical context for interpreting results.
+</div>
+
+<h2>5. Summary Checklist</h2>
+<table>
+  <thead>
+    <tr><th>Task</th><th>Details</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Search GEO for topic</td><td>Use clear, focused keywords</td></tr>
+    <tr><td>Select GSE entry</td><td>Click on GSE ID for metadata</td></tr>
+    <tr><td>Check design</td><td>Look for defined groups and replicates</td></tr>
+    <tr><td>Download matrix file</td><td>Use for input to downstream tools</td></tr>
+    <tr><td>Read the paper</td><td>Understand methodology and limitations</td></tr>
+  </tbody>
+</table>
+
+<h2>6. Next Steps</h2>
+<ul>
+  <li>Use <strong>GEO_EffectSizeApp</strong> to compute effect sizes from matrix data</li>
+  <li>Estimate sample size and power using <strong>PowerAnalysisApp</strong></li>
+  <li>Run <strong>GEO2R</strong> for differential expression analysis</li>
+  <li>Explore biological meaning using <strong>DAVID</strong> or other tools</li>
+</ul>
+
+<h2>7. References</h2>
+<ul>
+  <li><a href="https://www.ncbi.nlm.nih.gov/geo/" target="_blank">NCBI GEO Homepage</a></li>
+  <li><a href="https://www.ncbi.nlm.nih.gov/gds" target="_blank">GEO Datasets Search</a></li>
+  <li><a href="https://www.ncbi.nlm.nih.gov/pmc/" target="_blank">PubMed Central (for reading related studies)</a></li>
+</ul>
+
+</body>
+</html>
+

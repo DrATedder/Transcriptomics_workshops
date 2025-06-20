@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pre-Session Reading: Intorduction to Transcriptomics</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      margin: 2em auto;
+      max-width: 1000px;
+      padding: 2em;
+      color: #333;
+    }
+    h1, h2 {
+      color: #003366;
+    }
+    h3 {
+      color: #005599;
+    }
+    code, pre {
+      background: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    pre {
+      background: #f0f0f0;
+      padding: 1em;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    details {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 5px;
+    }
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #003366;
+    }
+    .highlight {
+      background-color: #fff5cc;
+      padding: 0.3em;
+      border-left: 4px solid #ffc107;
+      margin: 1em 0;
+    }
+    .callout {
+      background-color: #e8f4fc;
+      border-left: 5px solid #2196f3;
+      padding: 1em;
+      margin: 1em 0;
+    }
+    .flowchart-container {
+      margin: 2em 0;
+      padding: 1em;
+      border: 2px dashed #ccc;
+      background: #fdfdfd;
+    }
+    .flow-step {
+      display: block;
+      margin: 0.5em 0;
+      padding: 0.6em;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .lab { background-color: #d6eaf8; }
+    .qc { background-color: #f9e79f; }
+    .analysis { background-color: #d5f5e3; }
+    .downstream { background-color: #f5cba7; }
+    .arrow { text-align: center; margin: 0.5em 0; font-size: 1.2em; color: #666; }
+  </style>
+</head>
+<body>
+
+<h1>Pre-Session Reading: Introduction to Transcriptomics</h1>
+
+<div class="callout">
+  <strong>Goal:</strong> Equip students with foundational knowledge of transcriptomics, sequencing technologies, data processing pipelines, and research applications.
+</div>
+
+<h2>1. Introduction to Transcriptomics</h2>
+<p>
+Transcriptomics is the study of the complete set of RNA transcripts produced by the genome under specific circumstances or in a specific cell. It provides a dynamic view of gene activity, as opposed to genomics, which offers a static snapshot of potential function. Through transcriptomic analyses, researchers can investigate gene expression changes in response to environmental stimuli, disease states, developmental stages, or treatment conditions.
+</p>
+<p>
+This field is crucial in understanding functional genomics and offers insight into biological mechanisms at the molecular level. It enables researchers to identify biomarkers, characterize disease pathways, and infer gene regulation networks.
+</p>
+
+<h2>2. Sequencing Methods in Transcriptomics</h2>
+
+<details open>
+  <summary>Short-Read RNA-Seq (Illumina)</summary>
+  <p>
+    Short-read sequencing technologies, especially Illumina-based RNA-Seq, dominate the field. These methods generate millions of reads of 50–300 bp length, enabling high-throughput analysis of gene expression. Advantages include high accuracy, scalability, and established bioinformatic pipelines. However, limitations include poor resolution of full-length transcripts, difficulties in isoform detection, and biases introduced during amplification and alignment.
+    <br><strong>Stengths:</strong> high accuracy, deep coverage
+    <br><strong>Limitations:</strong> difficulty resolving isoforms and repetitive regions
+    <br><strong>Reference:</strong> Wang et al. (2009), <em>Nat Rev Genet</em>, <a href="https://doi.org/10.1038/nrg2484" target="_blank">DOI:10.1038/nrg2484</a>
+  </p>
+</details>
+
+<details>
+  <summary>Long-Read Sequencing (PacBio, Oxford Nanopore)</summary>
+  <p>
+    Long-read technologies provide full-length transcript information, improving isoform discovery and structural variant detection. PacBio’s Iso-Seq and Oxford Nanopore platforms offer read lengths in the thousands of base pairs. These methods are valuable for resolving complex transcriptomes but often have higher error rates and lower throughput compared to short-read sequencing.
+     
+    <br><strong>Stengths:</strong> full-length transcripts, better isoform annotation
+    <br><strong>Limitations:</strong> potentially higher error rate, lower throughput, more expensive
+    <br><strong>Reference:</strong> Byrne et al. (2017), <em>Nat Commun</em>, <a href="https://doi.org/10.1038/ncomms16027" target="_blank">DOI:10.1038/ncomms16027</a>
+  </p>
+</details>
+
+<details>
+  <summary>Microarrays</summary>
+  <p>
+    Although less commonly used today, microarrays are hybridization-based platforms for detecting known transcripts. They rely on complementary probes and are cost-effective but limited to pre-defined transcript sets and have lower dynamic range and specificity.
+    <br><strong>Stengths:</strong> high accuracy and cost effective
+    <br><strong>Limitations:</strong> limited to pre-defined transcript sets and have lower dynamic range and specificity. 
+    <br><strong>Reference:</strong> Allison et al. (2006), <em>Nat Rev Genet</em>, <a href="https://doi.org/10.1038/nrg1749" target="_blank">DOI:10.1038/nrg1749</a>
+  </p>
+</details>
+
+<details>
+   <summary>Single-cell RNA-seq (scRNA-seq)</summary>
+   <p>scRNA-seq enables transcriptomic profiling at the individual cell level. It is useful in identifying cell types, studying differentiation, and understanding heterogeneity in tissues or tumors.
+    <br><strong>Challenges:</strong> low input RNA, high noise, and data sparsity
+   <br><strong>Reference:</strong> Tang F et al. (2009) <em>Nat Methods</em>, <a href="https://www.nature.com/articles/nmeth.1315" target="_blank">DOI: 10.1038/nmeth.1315</a>
+   </p>
+ </details>  
+
+<h2>3. Transcriptomic Workflow</h2>
+<div class="flowchart-container">
+  <div class="flow-step lab">Sample Collection & RNA Extraction</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step lab">Library Preparation & Sequencing</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step qc">Quality Control (e.g., <code>FastQC</code>)</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step qc">Trimming & Filtering (e.g., <code>Trimmomatic</code>)</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step analysis">Read Alignment (e.g., <code>STAR</code>, <code>HISAT2</code>)</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step analysis">Quantification (e.g., <code>featureCounts</code>, <code>Salmon</code>)</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step analysis">Differential Expression (e.g., <code>DESeq2</code>, <code>edgeR</code>)</div>
+  <div class="arrow">↓</div>
+  <div class="flow-step downstream">GO/Pathway Analysis (e.g., <code>DAVID</code>, <code>GSEA</code>)</div>
+</div>
+
+
+<p>
+<br><strong>Figure 1. Basic transcriptomic workflow</strong> The laboratory steps of this workflow are shown in blue. These steps may vary depending on the type of sequencing which you will use. Quality control steps (yellow) ensure that poor quality sequence data (or complete runs) do not mislead interpretation. Alignment and quantification (green) are crucial for assigning read counts accurately. Differential expression analysis (also green) helps identify condition-specific expression changes. Downstream analyses (orange; only some examples shown) contextualize these genes in biological pathways or networks.
+</p>
+
+<h2>4. Types of Questions Addressed by Transcriptomics</h2>
+
+<details open>
+  <summary>Which genes are differentially expressed?</summary>
+  <p>This is the most common goal: identifying genes that change significantly across conditions. For example, which genes are upregulated in tumor tissue vs. healthy controls? These are identified using statistical models that account for variability, such as <code>DESeq2</code> or <code>Limma-Voom</code>.</p>
+</details>
+
+<details>
+  <summary>How do pathways or processes change?</summary>
+  <p>Instead of individual genes, we can test for enrichment of entire biological pathways. Tools like <code>DAVID</code> or <code>g:Profiler</code> map gene sets to functional annotations.</p>
+</details>
+
+<details>
+  <summary>What isoforms are expressed?</summary>
+  <p>Using long-read or isoform-aware tools, transcriptomics can reveal alternative splicing patterns or isoform usage, which may be crucial in disease mechanisms.</p>
+</details>
+
+<details>
+  <summary>How do samples cluster?</summary>
+  <p><code>PCA</code>, <code>t-SNE</code>, or <code>hierarchical clustering</code> allow researchers to assess similarities between samples, detect outliers, and explore batch effects or hidden structure.</p>
+</details>
+
+<h2>5. Limitations and Considerations</h2>
+
+<details open>
+  <summary>Sample Quality</summary>
+  <p>RNA integrity is crucial. Degraded RNA leads to poor sequencing results and biases in gene expression estimation. Always perform RIN scoring or electrophoresis before library prep.     
+  <br><strong>Reference:</strong> Fleige & Pfaffl. (2006) <a href="https://doi.org/10.1016/j.mam.2005.12.003" target="_blank">DOI:https:10.1016/j.mam.2005.12.003</a>
+  </p>
+</details>
+
+<details>
+  <summary>Batch Effects</summary>
+  <p>Technical variation from different runs, reagent lots, or sequencing machines can introduce batch effects. These can confound biological signals and must be corrected (e.g., via <code>ComBat</code>). 
+  <br><strong>Reference:</strong> Leek et al. (2010) <a href="https://doi.org/10.1038/nrg2825" target="_blank">DOI:10.1038/nrg2825</a>
+  </p>
+</details>
+
+<details>
+  <summary>Sequencing Depth</summary>
+  <p>Too few reads per sample limits sensitivity. Gene discovery and quantification require appropriate sequencing depth (e.g., 30M reads/sample for human bulk RNA-Seq). 
+  <br><strong>Reference:</strong> Roobinson & Storey. (2014) <a href="https://doi.org/10.1093/bioinformatics/btu552" target="_blank">DOI:10.1093/bioinformatics/btu552</a>
+  </p>
+</details>
+
+<details>
+  <summary>Normalization</summary>
+  <p>Read counts must be normalized to control for library size and composition bias (e.g., <code>TMM</code>, <code>DESeq2</code>'s size factor). Improper normalization can inflate false positives or obscure true biological effects. 
+  <br><strong>Reference:</strong> Bullard et al. (2010) <a href="https://doi.org/10.1186/1471-2105-11-94" target="_blank">DOI:10.1186/1471-2105-11-94</a>
+  </p>
+</details>
+
+<details>
+  <summary>Multiple Testing</summary>
+  <p>Thousands of genes are tested in parallel, requiring control for false discovery. Standard practice uses Benjamini-Hochberg FDR correction with <code>adj.P.Val &lt; 0.05</code>.
+  <br><strong>Reference:</strong> Benjamini & Hochberg. (1995) <a href="https://doi.org/10.1111/j.2517-6161.1995.tb02031.x" target="_blank">DOI:10.1111/j.2517-6161.1995.tb02031.x</a>
+  </p>
+</details>
+
+<h2>6. Recommended Reading</h2>
+<table>
+  <thead>
+    <tr><th>Title</th><th>Authors</th><th>Link</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RNA-Seq: A revolutionary tool for transcriptomics</td>
+      <td>Wang, Gerstein, & Snyder (2009)</td>
+      <td><a href="https://doi.org/10.1038/nrg2484" target="_blank">DOI:10.1038/nrg2484</a></td>
+    </tr>
+    <tr>
+      <td>RNA integrity and the effect on the real-time qRT-PCR performance</td>
+      <td>Fleige & Pfaffl (2006)</td>
+      <td><a href="https://doi.org/10.1016/j.mam.2005.12.003" target="_blank">DOI:https:10.1016/j.mam.2005.12.003</a></td>
+    </tr>
+    <tr>
+      <td>A survey of best practices for RNA-seq data analysis</td>
+      <td>Conesa et al. (2016)</td>
+      <td><a href="https://doi.org/10.1186/s13059-016-0881-8" target="_blank">DOI:10.1186/s13059-016-0881-8</a></td>
+    </tr>
+    <tr>
+      <td>Tackling the widespread and critical impact of batch effects in high-throughput data</td>
+      <td>Leek et al. (2010)</td>
+      <td><a href="https://doi.org/10.1038/nrg2825" target="_blank">DOI:10.1038/nrg2825</a></td>
+    </tr>
+    <tr>
+      <td>Evaluation of statistical methods for normalization and differential expression in mRNA-Seq experiments</td>
+      <td>Bullard et al. (2010)</td>
+      <td><a href="https://doi.org/10.1186/1471-2105-11-94" target="_blank">DOI:10.1186/1471-2105-11-94</a></td>
+    </tr>
+    <tr>
+      <td>Nanopore long-read RNAseq reveals widespread transcriptional variation among the surface receptors of individual B cells</td>
+      <td>Byrne et al. (2017)</td>
+      <td><a href="https://doi.org/10.1038/ncomms16027" target="_blank">DOI:10.1038/ncomms16027</a></td>
+    </tr>
+    <tr>
+      <td>Microarray data analysis: from disarray to consolidation and consensus</td>
+      <td>Allison et al. (2006)</td>
+      <td><a href="https://doi.org/10.1038/nrg1749" target="_blank">DOI:10.1038/nrg1749</a></td>
+    </tr>
+    <tr>
+      <td>mRNA-Seq whole-transcriptome analysis of a single cell</td>
+      <td>Tang et al. (2009)</td>
+      <td><a href="https://www.nature.com/articles/nmeth.1315" target="_blank">DOI:10.1038/nmeth.1315</a></td>
+    </tr>
+    <tr>
+      <td>subSeq: Determining Appropriate Sequencing Depth Through Efficient Read Subsampling</td>
+      <td>Robinson & Storey. (2014)</td>
+      <td><a href="https://doi.org/10.1093/bioinformatics/btu552" target="_blank">DOI:10.1093/bioinformatics/btu552</a></td>
+    </tr>
+    <tr>
+      <td>Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing</td>
+      <td>Benjamini & Hochberg. (1995)</td>
+      <td><a href="https://doi.org/10.1111/j.2517-6161.1995.tb02031.x" target="_blank">DOI:10.1111/j.2517-6161.1995.tb02031.x</a></td>
+    </tr>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

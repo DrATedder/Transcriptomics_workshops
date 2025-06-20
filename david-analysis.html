@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GO Analysis with DAVID</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      margin: 2em auto;
+      max-width: 900px;
+      padding: 2em;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #003366;
+    }
+
+    h3 {
+      color: #005599;
+    }
+
+    code, pre {
+      background: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    pre {
+      background: #f0f0f0;
+      padding: 1em;
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    details {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 5px;
+    }
+
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #003366;
+    }
+
+    .highlight {
+      background-color: #fff5cc;
+      padding: 0.3em;
+      border-left: 4px solid #ffc107;
+      margin: 1em 0;
+    }
+
+    .callout {
+      background-color: #e8f4fc;
+      border-left: 5px solid #2196f3;
+      padding: 1em;
+      margin: 1em 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Gene Ontology Analysis with DAVID</h1>
+
+<div class="callout">
+  <strong>Goal:</strong> Use DAVID to interpret biological significance of differentially expressed genes (DEGs).
+</div>
+
+<h2>1. Introduction and Rationale</h2>
+<p>
+High-throughput experiments like RNA-Seq often yield long lists of DEGs. Interpreting these lists biologically is essential.
+</p>
+<p>
+DAVID (Database for Annotation, Visualization and Integrated Discovery) helps determine whether certain biological functions or pathways are statistically enriched among your DEGs.
+</p>
+<p><strong>DAVID Website:</strong> <a href="https://david.ncifcrf.gov/" target="_blank">https://david.ncifcrf.gov/</a></p>
+
+<h2>2. Concepts and Terminology</h2>
+<details open>
+  <summary>Gene Ontology (GO)</summary>
+  <ul>
+    <li><strong>Biological Process (BP):</strong> e.g., cell division, apoptosis</li>
+    <li><strong>Molecular Function (MF):</strong> e.g., kinase activity</li>
+    <li><strong>Cellular Component (CC):</strong> e.g., nucleus, mitochondrion</li>
+  </ul>
+</details>
+
+<details>
+  <summary>KEGG Pathways</summary>
+  <p>
+  KEGG is a pathway database that maps genes to curated pathways like MAPK signaling or glycolysis.
+  </p>
+</details>
+
+<h2>3. Preparing for DAVID</h2>
+<details open>
+  <summary>Input Requirements</summary>
+  <ul>
+    <li>List of genes (e.g., Entrez IDs, Gene Symbols)</li>
+    <li>Optional: Background list of all genes tested</li>
+  </ul>
+  <pre>TP53
+BRCA1
+EGFR
+MYC
+CDKN1A</pre>
+</details>
+
+<details>
+  <summary>Identifier Consistency</summary>
+  <p>Ensure all gene identifiers are from the same system and organism. Mismatched or mixed identifiers lead to inaccurate results.</p>
+</details>
+
+<h2>4. Step-by-Step Procedure</h2>
+<details open>
+  <summary>Step 1: Access DAVID</summary>
+  <p>Go to <a href="https://david.ncifcrf.gov/" target="_blank">https://david.ncifcrf.gov/</a> and click <strong>"Start Analysis"</strong>.</p>
+</details>
+
+<details>
+  <summary>Step 2: Upload Gene List</summary>
+  <ul>
+    <li>Select <strong>Gene List</strong> tab</li>
+    <li>Paste or upload your genes</li>
+    <li>Choose ID type (e.g., Official Gene Symbol)</li>
+    <li>Select species</li>
+    <li>Click <strong>Submit List</strong></li>
+  </ul>
+</details>
+
+<details>
+  <summary>Step 3: Functional Annotation</summary>
+  <p>Click <strong>Functional Annotation Tool</strong> to see enriched GO terms and KEGG pathways.</p>
+</details>
+
+<details>
+  <summary>Step 4: Interpret Results</summary>
+  <table>
+    <thead>
+      <tr><th>Column</th><th>Meaning</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>Term</code></td><td>GO/KEGG description</td></tr>
+      <tr><td><code>Count</code></td><td>Number of genes in the category</td></tr>
+      <tr><td><code>P-Value</code></td><td>Statistical significance</td></tr>
+      <tr><td><code>Benjamini</code></td><td>FDR-adjusted p-value</td></tr>
+      <tr><td><code>Fold Enrichment</code></td><td>Overrepresentation ratio</td></tr>
+    </tbody>
+  </table>
+</details>
+
+<h2>5. Statistical Considerations</h2>
+<ul>
+  <li><strong>Use Benjamini FDR &lt; 0.05</strong> to identify significant terms.</li>
+  <li>Filter out categories with &lt; 2–3 gene hits for better robustness.</li>
+</ul>
+
+<div class="highlight">
+  Fold enrichment shows how much more often a GO term appears in your gene list than by chance.
+</div>
+
+<h2>6. KEGG Pathway Analysis</h2>
+<p>
+DAVID maps your genes to known biological pathways. Click through KEGG maps to see highlighted genes in context.
+</p>
+<p><strong>KEGG Browser:</strong> <a href="https://www.genome.jp/kegg/pathway.html" target="_blank">https://www.genome.jp/kegg/pathway.html</a></p>
+
+<h2>7. Optional: Custom Background</h2>
+<p>
+For greater accuracy, upload a background gene list (e.g., all expressed genes in your dataset). This ensures the enrichment is calculated correctly.
+</p>
+
+<h2>8. Exporting Results</h2>
+<p>
+Use the export buttons in DAVID to download CSV or TSV files. You can then visualize the data using R (e.g., <code>ggplot2</code>) or <code>clusterProfiler</code>.
+</p>
+
+<h2>9. Best Practice Summary</h2>
+<table>
+  <thead>
+    <tr><th>Component</th><th>Recommendation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Gene IDs</td><td>Official symbols or Entrez IDs</td></tr>
+    <tr><td>Species</td><td>Explicitly set in DAVID</td></tr>
+    <tr><td>Background List</td><td>Use if available</td></tr>
+    <tr><td>Correction Method</td><td>Benjamini-Hochberg FDR &lt; 0.05</td></tr>
+    <tr><td>Minimum Count</td><td>2–3 genes per term</td></tr>
+    <tr><td>Resources</td><td>Use both GO and KEGG databases</td></tr>
+  </tbody>
+</table>
+
+<h2>10. References</h2>
+<ul>
+  <li><a href="https://david.ncifcrf.gov/content.jsp?file=functional_annotation.html" target="_blank">DAVID Tutorial</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/False_discovery_rate" target="_blank">Benjamini-Hochberg Method</a></li>
+  <li><a href="http://geneontology.org/" target="_blank">GO Browser</a></li>
+  <li><a href="https://www.genome.jp/kegg/pathway.html" target="_blank">KEGG Pathways</a></li>
+  <li><a href="https://www.youtube.com/watch?v=6OqYL3_0Lvc" target="_blank">NCBI DAVID Video Walkthrough</a></li>
+</ul>
+
+</body>
+</html>

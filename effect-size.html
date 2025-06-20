@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GEO_EffectSizeApp Tutorial</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      margin: 2em auto;
+      max-width: 900px;
+      padding: 2em;
+      color: #333;
+    }
+
+    h1, h2 {
+      color: #003366;
+    }
+
+    h3 {
+      color: #005599;
+    }
+
+    code, pre {
+      background: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    pre {
+      background: #f0f0f0;
+      padding: 1em;
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1em 0;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    details {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 5px;
+    }
+
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #003366;
+    }
+
+    .highlight {
+      background-color: #fff5cc;
+      padding: 0.3em;
+      border-left: 4px solid #ffc107;
+      margin: 1em 0;
+    }
+
+    .callout {
+      background-color: #e8f4fc;
+      border-left: 5px solid #2196f3;
+      padding: 1em;
+      margin: 1em 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5em 1em;
+      margin: 0.5em 0;
+      background-color: #005599;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .btn:hover {
+      background-color: #003366;
+    }
+  </style>
+</head>
+<body>
+
+<h1>GEO_EffectSizeApp Tutorial</h1>
+
+<p>This tutorial guides you through using <strong>GEO_EffectSizeApp</strong>—a Java tool for computing effect sizes (Cohen’s d) from gene expression data—to assist in downstream power analysis and study design.</p>
+<p>You can find more information about <strong>GEO_EffectSizeApp</strong> at the GitHub page <a href="https://github.com/DrATedder/GEO_EffectSizeApp" target="_blank">here</a>, including downloading the pre-compiled <a href=https://github.com/DrATedder/GEO_EffectSizeApp/releasestarget="_blank">App (v0.1.1)</a>.</p>
+
+<div class="callout">
+  <strong>Target audience:</strong> Students in bioinformatics, genomics, or statistics working with gene expression data.
+</div>
+
+<h2>1. Background</h2>
+
+<details open>
+  <summary>What is Effect Size?</summary>
+  <p>Effect size quantifies the magnitude of a difference between two groups. Unlike p-values, which reflect statistical significance, effect sizes tell you <em>how much</em> change occurs.</p>
+</details>
+
+<details>
+  <summary>Understanding Cohen’s d</summary>
+  <p>Cohen's d is defined as:</p>
+  <pre>Cohen's d = (Mean<sub>Group1</sub> - Mean<sub>Group2</sub>) / Pooled Standard Deviation</pre>
+  <p>Interpretation:</p>
+  <ul>
+    <li>d = 0.2 → Small effect</li>
+    <li>d = 0.5 → Medium effect</li>
+    <li>d = 0.8 → Large effect</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Why Use Power Analysis?</summary>
+  <p>Power analysis answers two key questions:</p>
+  <ul>
+    <li><strong>Post hoc:</strong> Was your study adequately powered to detect an effect?</li>
+    <li><strong>A priori:</strong> How many samples are needed to detect a meaningful effect?</li>
+  </ul>
+</details>
+
+<h2>2. Setting Up the App</h2>
+
+<p>Make sure you have Java 8 or newer installed. Then, either 'double click' the app, or run it with:</p>
+<pre><code>java -jar GEO_EffectSizeApp.jar</code></pre>
+
+<h2>3. Step-by-Step Instructions</h2>
+
+<details open>
+  <summary>Step 1: Load GEO Series Matrix File</summary>
+  <p>Click the <strong>"Load GEO Matrix File"</strong> button and select a <code>.txt</code> or decompressed matrix file. The app expects:</p>
+  <ul>
+    <li>A header line with <code>ID_REF</code> followed by sample IDs</li>
+    <li>Expression values in tab-separated columns</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Step 2: Define Sample Groups</summary>
+  <p>Use the checkboxes to assign samples into <strong>Group 1</strong> and <strong>Group 2</strong>. It is <strong>really</strong> important that you have understood the experimental design used in the original study when you select these groups, otherwise your output will likely be nonsense!</p>
+  <div class="highlight">Ensure each sample is only in one group and that both groups contain at least one sample.</div>
+</details>
+
+<details>
+  <summary>Step 3: Compute Effect Sizes</summary>
+  <p>Click <strong>"Compute Cohen’s d"</strong> to run calculations. Results appear in the right-hand table, sorted by absolute effect size.</p>
+</details>
+
+<details>
+  <summary>Step 4: Export Results</summary>
+  <p>Click <strong>"Export Top Genes"</strong> to export either:</p>
+  <ul>
+    <li><strong>Top N genes</strong> ranked by effect size</li>
+    <li><strong>All genes with |d| above a threshold</strong> (e.g., 0.8)</li>
+  </ul>
+</details>
+
+<h2>4. Choosing Export Criteria</h2>
+
+<p><strong>Export Top N:</strong> Use for ranking or screening when N is fixed (e.g. top 100 genes).</p>
+<p><strong>Export by |d| Threshold:</strong> Use when planning power calculations or prioritizing biologically significant changes.</p>
+
+<div class="callout">
+  <strong>Recommendation:</strong> Use d ≥ 0.8 as a starting point for large effects, but adjust based on domain knowledge.
+</div>
+
+<h2>5. Power Analysis Example</h2>
+
+<p>Once you export effect sizes, you can use a variety of tools to estimate statistical power. We are going to use <a href="https://github.com/DrATedder/PowerAnalysisApp" target="_blank">PowerAnalysisApp</a>, but you could also use R, Python, or other tools to estimate statistical power.</p>
+
+<h3>Example in R using the <code>pwr</code> package:</h3>
+<pre><code>library(pwr)
+pwr.t.test(d = 0.8, power = 0.8, sig.level = 0.05, type = "two.sample")</code></pre>
+
+<h3>Example in Python (with <code>statsmodels</code>):</h3>
+<pre><code>from statsmodels.stats.power import TTestIndPower
+analysis = TTestIndPower()
+analysis.solve_power(effect_size=0.8, power=0.8, alpha=0.05)</code></pre>
+
+<h2>6. Summary Table</h2>
+
+<table>
+  <thead>
+    <tr><th>Feature</th><th>Purpose</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Load GEO file</td><td>Import expression matrix</td></tr>
+    <tr><td>Assign groups</td><td>Define two biological conditions</td></tr>
+    <tr><td>Compute Cohen’s d</td><td>Calculate effect sizes for each gene</td></tr>
+    <tr><td>Export results</td><td>Save top-N or threshold-filtered gene list</td></tr>
+    <tr><td>Power analysis</td><td>Plan future experiments</td></tr>
+  </tbody>
+</table>
+
+<h2>7. Further Reading</h2>
+<ul>
+  <li><a href="https://doi.org/10.1037//0033-2909.112.1.155" target="_blank">Cohen (1992), A Power Primer</a></li>
+  <li><a href="https://www.ncbi.nlm.nih.gov/geo/" target="_blank">NCBI GEO Data Repository</a></li>
+  <li><a href="https://jasp-stats.org/" target="_blank">JASP Power Analysis (GUI)</a></li>
+</ul>
+
+</body>
+</html>
