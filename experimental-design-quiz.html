@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Experimental Design Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      margin: 2em auto;
+      max-width: 900px;
+      padding: 2em;
+      color: #333;
+    }
+    h1, h2 {
+      color: #003366;
+    }
+    .question {
+      margin-bottom: 1.5em;
+      padding: 1em;
+      background: #fff;
+      border-left: 4px solid #005599;
+      border-radius: 4px;
+    }
+    .question h3 {
+      margin-top: 0;
+    }
+    label {
+      display: block;
+      margin: 0.4em 0;
+    }
+    button {
+      background-color: #005599;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #003f7f;
+    }
+    #result {
+      margin-top: 2em;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #003366;
+      padding: 1em;
+      border-top: 2px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Experimental Design for Transcriptomics: Self-Assessment Quiz</h1>
+<p>Test your understanding of key principles in experimental design, replication, randomization, and statistical power in transcriptomics research.</p>
+
+<form id="quizForm">
+
+  <div class="question">
+    <h3>1. What is the primary experimental unit in a transcriptomics study?</h3>
+    <label><input type="radio" name="q1" value="a"> The number of sequencing reads</label>
+    <label><input type="radio" name="q1" value="b"> The laboratory performing the sequencing</label>
+    <label><input type="radio" name="q1" value="c"> The biological sample from which RNA is extracted</label>
+    <label><input type="radio" name="q1" value="d"> The technician handling sample prep</label>
+  </div>
+
+  <div class="question">
+    <h3>2. What is the main purpose of biological replicates in RNA-Seq experiments?</h3>
+    <label><input type="radio" name="q2" value="a"> To reduce RNA degradation</label>
+    <label><input type="radio" name="q2" value="b"> To measure sequencing depth accurately</label>
+    <label><input type="radio" name="q2" value="c"> To capture variation between individual organisms or samples</label>
+    <label><input type="radio" name="q2" value="d"> To calibrate the base quality scores</label>
+  </div>
+
+  <div class="question">
+    <h3>3. What is a key risk if all samples from one condition are sequenced in the same run?</h3>
+    <label><input type="radio" name="q3" value="a"> Increased sequencing cost</label>
+    <label><input type="radio" name="q3" value="b"> Higher RNA input needed</label>
+    <label><input type="radio" name="q3" value="c"> Confounding of condition with batch effects</label>
+    <label><input type="radio" name="q3" value="d"> Underpowered differential expression</label>
+  </div>
+
+  <div class="question">
+    <h3>4. Why is blocking used in experimental design?</h3>
+    <label><input type="radio" name="q4" value="a"> To speed up sequencing</label>
+    <label><input type="radio" name="q4" value="b"> To prevent randomization</label>
+    <label><input type="radio" name="q4" value="c"> To control known sources of variation</label>
+    <label><input type="radio" name="q4" value="d"> To avoid technical replicates</label>
+  </div>
+
+  <div class="question">
+    <h3>5. In a power analysis for RNA-Seq, which of the following does <em>not</em> directly affect statistical power?</h3>
+    <label><input type="radio" name="q5" value="a"> Read alignment algorithm</label>
+    <label><input type="radio" name="q5" value="b"> Number of biological replicates</label>
+    <label><input type="radio" name="q5" value="c"> Effect size</label>
+    <label><input type="radio" name="q5" value="d"> Variance (dispersion)</label>
+  </div>
+
+  <div class="question">
+    <h3>6. Which tool is explicitly recommended for assessing RNA quality before library preparation?</h3>
+    <label><input type="radio" name="q6" value="a"> STAR</label>
+    <label><input type="radio" name="q6" value="b"> DESeq2</label>
+    <label><input type="radio" name="q6" value="c"> FastQC</label>
+    <label><input type="radio" name="q6" value="d"> featureCounts</label>
+  </div>
+
+  <div class="question">
+    <h3>7. What is an appropriate RIN score threshold for high-quality RNA samples?</h3>
+    <label><input type="radio" name="q7" value="a"> 3.0</label>
+    <label><input type="radio" name="q7" value="b"> 5.5</label>
+    <label><input type="radio" name="q7" value="c"> 7.0</label>
+    <label><input type="radio" name="q7" value="d"> 10.5</label>
+  </div>
+
+  <div class="question">
+    <h3>8. According to the 3Rs, what does "Replacement" encourage in experimental design?</h3>
+    <label><input type="radio" name="q8" value="a"> Repeating experiments for higher power</label>
+    <label><input type="radio" name="q8" value="b"> Using animals for all experiments</label>
+    <label><input type="radio" name="q8" value="c"> Using alternatives like cell lines or archived tissues where possible</label>
+    <label><input type="radio" name="q8" value="d"> Replacing technicians between runs</label>
+  </div>
+
+  <div class="question">
+    <h3>9. What is a recommended strategy to handle known batch effects during analysis?</h3>
+    <label><input type="radio" name="q9" value="a"> Use of TMM normalization only</label>
+    <label><input type="radio" name="q9" value="b"> Include batch as a covariate or correct using tools like ComBat</label>
+    <label><input type="radio" name="q9" value="c"> Remove all low-count genes</label>
+    <label><input type="radio" name="q9" value="d"> Increase sequencing depth</label>
+  </div>
+
+  <div class="question">
+    <h3>10. What is a key ethical reason for conducting a formal power analysis before sequencing?</h3>
+    <label><input type="radio" name="q10" value="a"> To maximize p-values</label>
+    <label><input type="radio" name="q10" value="b"> To satisfy journal formatting guidelines</label>
+    <label><input type="radio" name="q10" value="c"> To justify animal use and avoid under- or over-sampling</label>
+    <label><input type="radio" name="q10" value="d"> To increase sequencing depth</label>
+  </div>
+
+  <button type="button" onclick="calculateScore()">Submit Quiz</button>
+
+</form>
+
+<div id="result"></div>
+
+<script>
+function calculateScore() {
+  const answers = {
+    q1: "c",
+    q2: "c",
+    q3: "c",
+    q4: "c",
+    q5: "a",
+    q6: "c",
+    q7: "c",
+    q8: "c",
+    q9: "b",
+    q10: "c"
+  };
+  let score = 0;
+  let total = Object.keys(answers).length;
+
+  for (let q in answers) {
+    let selected = document.querySelector('input[name="' + q + '"]:checked');
+    if (selected && selected.value === answers[q]) {
+      score++;
+    }
+  }
+
+  let percent = (score / total) * 100;
+  let resultText = `You scored ${score} out of ${total} (${percent.toFixed(1)}%).`;
+
+  document.getElementById("result").innerText = resultText;
+}
+</script>
+
+</body>
+</html>
+
