@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Transcriptomics Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      margin: 2em auto;
+      max-width: 900px;
+      padding: 2em;
+      color: #333;
+    }
+    h1, h2 {
+      color: #003366;
+    }
+    .question {
+      margin-bottom: 1.5em;
+      padding: 1em;
+      background: #fff;
+      border-left: 4px solid #005599;
+      border-radius: 4px;
+    }
+    .question h3 {
+      margin-top: 0;
+    }
+    label {
+      display: block;
+      margin: 0.4em 0;
+    }
+    button {
+      background-color: #005599;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #003f7f;
+    }
+    #result {
+      margin-top: 2em;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #003366;
+      padding: 1em;
+      border-top: 2px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Transcriptomics: Self-Assessment Quiz</h1>
+<p>This short quiz includes 10 multiple choice questions to assess your understanding of the key principles and practices in transcriptomics.</p>
+
+<form id="quizForm">
+
+  <div class="question">
+    <h3>1. What is the primary goal of transcriptomics?</h3>
+    <label><input type="radio" name="q1" value="a"> To sequence the entire DNA of an organism</label>
+    <label><input type="radio" name="q1" value="b"> To identify genetic mutations in populations</label>
+    <label><input type="radio" name="q1" value="c"> To study the complete set of RNA transcripts produced under specific conditions</label>
+    <label><input type="radio" name="q1" value="d"> To evaluate the 3D structure of proteins</label>
+  </div>
+
+  <div class="question">
+    <h3>2. Which sequencing technology is most commonly used for high-throughput RNA sequencing?</h3>
+    <label><input type="radio" name="q2" value="a"> Sanger sequencing</label>
+    <label><input type="radio" name="q2" value="b"> Illumina short-read sequencing</label>
+    <label><input type="radio" name="q2" value="c"> Oxford Nanopore only</label>
+    <label><input type="radio" name="q2" value="d"> qRT-PCR</label>
+  </div>
+
+  <div class="question">
+    <h3>3. What is a major limitation of short-read RNA-Seq?</h3>
+    <label><input type="radio" name="q3" value="a"> High error rates</label>
+    <label><input type="radio" name="q3" value="b"> High cost per base</label>
+    <label><input type="radio" name="q3" value="c"> Difficulty resolving full-length isoforms</label>
+    <label><input type="radio" name="q3" value="d"> Incompatibility with eukaryotic genomes</label>
+  </div>
+
+  <div class="question">
+    <h3>4. What is the typical recommended read depth for standard bulk RNA-Seq?</h3>
+    <label><input type="radio" name="q4" value="a"> 5 million reads per sample</label>
+    <label><input type="radio" name="q4" value="b"> 10 million reads per sample</label>
+    <label><input type="radio" name="q4" value="c"> 30–50 million reads per sample</label>
+    <label><input type="radio" name="q4" value="d"> 100–150 million reads per sample</label>
+  </div>
+
+  <div class="question">
+    <h3>5. What does the RIN score indicate?</h3>
+    <label><input type="radio" name="q5" value="a"> RNA concentration</label>
+    <label><input type="radio" name="q5" value="b"> Number of isoforms detected</label>
+    <label><input type="radio" name="q5" value="c"> RNA integrity or degradation level</label>
+    <label><input type="radio" name="q5" value="d"> Library fragment size</label>
+  </div>
+
+  <div class="question">
+    <h3>6. Which method is commonly used for differential gene expression analysis?</h3>
+    <label><input type="radio" name="q6" value="a"> BLAST</label>
+    <label><input type="radio" name="q6" value="b"> DESeq2</label>
+    <label><input type="radio" name="q6" value="c"> ClustalW</label>
+    <label><input type="radio" name="q6" value="d"> UCSC Genome Browser</label>
+  </div>
+
+  <div class="question">
+    <h3>7. What is the purpose of multiple testing correction in transcriptomic analysis?</h3>
+    <label><input type="radio" name="q7" value="a"> To reduce sequencing errors</label>
+    <label><input type="radio" name="q7" value="b"> To improve RNA quality scores</label>
+    <label><input type="radio" name="q7" value="c"> To control false discovery rate due to many hypothesis tests</label>
+    <label><input type="radio" name="q7" value="d"> To eliminate batch effects</label>
+  </div>
+
+  <div class="question">
+    <h3>8. Which of the following tools is designed for gene ontology or pathway enrichment analysis?</h3>
+    <label><input type="radio" name="q8" value="a"> FastQC</label>
+    <label><input type="radio" name="q8" value="b"> STAR</label>
+    <label><input type="radio" name="q8" value="c"> DAVID</label>
+    <label><input type="radio" name="q8" value="d"> Trimmomatic</label>
+  </div>
+
+  <div class="question">
+    <h3>9. What is the role of normalization in RNA-Seq analysis?</h3>
+    <label><input type="radio" name="q9" value="a"> To align reads to the genome</label>
+    <label><input type="radio" name="q9" value="b"> To reduce RNA degradation</label>
+    <label><input type="radio" name="q9" value="c"> To correct for differences in sequencing depth and composition</label>
+    <label><input type="radio" name="q9" value="d"> To measure RIN scores</label>
+  </div>
+
+  <div class="question">
+    <h3>10. Which of the following is a known challenge of single-cell RNA-seq (scRNA-seq)?</h3>
+    <label><input type="radio" name="q10" value="a"> Excessively high RNA input requirements</label>
+    <label><input type="radio" name="q10" value="b"> Limited sequencing platform compatibility</label>
+    <label><input type="radio" name="q10" value="c"> High noise and data sparsity</label>
+    <label><input type="radio" name="q10" value="d"> Inability to distinguish cell types</label>
+  </div>
+
+  <button type="button" onclick="calculateScore()">Submit Quiz</button>
+
+</form>
+
+<div id="result"></div>
+
+<script>
+function calculateScore() {
+  const answers = {
+    q1: "c",
+    q2: "b",
+    q3: "c",
+    q4: "c",
+    q5: "c",
+    q6: "b",
+    q7: "c",
+    q8: "c",
+    q9: "c",
+    q10: "c"
+  };
+  let score = 0;
+  let total = Object.keys(answers).length;
+
+  for (let q in answers) {
+    let selected = document.querySelector('input[name="' + q + '"]:checked');
+    if (selected && selected.value === answers[q]) {
+      score++;
+    }
+  }
+
+  let percent = (score / total) * 100;
+  let resultText = `You scored ${score} out of ${total} (${percent.toFixed(1)}%).`;
+
+  document.getElementById("result").innerText = resultText;
+}
+</script>
+
+</body>
+</html>
+
